@@ -16,15 +16,11 @@ const bookRoutes = require("./routes/bookRoutes");
 app.use("/api/books", bookRoutes);
 
 // Connect to MongoDB
-console.log("🔍 MONGO_URI:", process.env.MONGO_URI);
-const mongoURI = process.env.MONGO_URI;
+const uri = process.env.MONGO_URI.trim(); // Trim any extra spaces or characters
+console.log("🔍 MONGO_URI:", `"${uri}"`); // Debugging output
 
-if (!mongoURI) {
-  console.error("❌ MONGO_URI is missing or undefined!");
-  process.exit(1);
-}
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(uri)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err, process.env.MONGO_URI));
 
