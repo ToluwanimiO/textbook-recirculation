@@ -16,7 +16,8 @@ const bookRoutes = require("./routes/bookRoutes");
 app.use("/api/books", bookRoutes);
 
 // Connect to MongoDB
-const uri = process.env.MONGO_URI.trim(); // Trim any extra spaces or characters
+const uri = process.env.MONGO_URI.trim().replace(/^=/, ""); // Trim any extra spaces or characters
+
 console.log("🔍 MONGO_URI:", `"${uri}"`); // Debugging output
 
 mongoose
