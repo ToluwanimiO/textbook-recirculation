@@ -19,7 +19,7 @@ app.use("/api/books", bookRoutes);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err,process.env.MONGO_URI));
 
 app.get("/", (req, res) => {
   res.send("Textbook Recirculation API");
