@@ -17,6 +17,8 @@ app.use("/api/books", bookRoutes);
 
 // Connect to MongoDB
 console.log("🔍 MONGO_URI:", process.env.MONGO_URI);
+const mongoURI = process.env.MONGO_URI;
+
 if (!mongoURI) {
   console.error("❌ MONGO_URI is missing or undefined!");
   process.exit(1);
