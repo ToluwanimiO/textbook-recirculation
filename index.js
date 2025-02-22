@@ -16,10 +16,15 @@ const bookRoutes = require("./routes/bookRoutes");
 app.use("/api/books", bookRoutes);
 
 // Connect to MongoDB
+console.log("🔍 MONGO_URI:", process.env.MONGO_URI);
+if (!mongoURI) {
+  console.error("❌ MONGO_URI is missing or undefined!");
+  process.exit(1);
+}
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log(err,process.env.MONGO_URI));
+  .catch((err) => console.log(err, process.env.MONGO_URI));
 
 app.get("/", (req, res) => {
   res.send("Textbook Recirculation API");
