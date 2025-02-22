@@ -8,11 +8,9 @@ exports.register = async (req, res) => {
       name,
       email,
       password,
-      phone,
       role,
       location,
-      availableBooks,
-      anonymous,
+      libraryLimit,
     } = req.body;
 
     // Validate role
@@ -21,16 +19,10 @@ exports.register = async (req, res) => {
     }
 
     // Validate role-specific fields
-    if (role === "school" && (!location || !availableBooks)) {
+    if (role === "school" && (!location || !libraryLimit)) {
       return res
         .status(400)
         .json({ message: "Schools must provide location and available books" });
-    }
-
-    if (role === "donor" && typeof anonymous !== "boolean") {
-      return res
-        .status(400)
-        .json({ message: "Donors must specify anonymous as true or false" });
     }
 
     // Check if the user already exists
@@ -48,11 +40,9 @@ exports.register = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      phone,
       role,
       location: role === "school" ? location : undefined,
-      availableBooks: role === "school" ? availableBooks : undefined,
-      anonymous: role === "donor" ? anonymous : undefined,
+      libraryLimit: role === "school" ? libraryLimit : undefined,
     });
 
     await newUser.save();
@@ -70,11 +60,9 @@ exports.register = async (req, res) => {
         id: newUser._id,
         name,
         email,
-        phone,
         role,
         location: newUser.location,
-        availableBooks: newUser.availableBooks,
-        anonymous: newUser.anonymous,
+        libraryLimit: newUser.libraryLimit,
       },
       token,
     });
@@ -106,11 +94,9 @@ exports.login = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        phone: user.phone,
         role: user.role,
         location: user.location,
-        availableBooks: user.availableBooks,
-        anonymous: user.anonymous,
+        libraryLimit: user.libraryLimit,
       },
       token,
     });
