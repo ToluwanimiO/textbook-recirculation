@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/", addBook);
 router.get("/", getAllBooks);
-router.get("/books/:bookId/recommendations", getRecommendedBooks);
+router.get("/:bookId/recommendations", getRecommendedBooks);
 router.put("/:bookId/claim", claimBook);
 router.get("/search/:title", searchBookByTitle);  // Binary Search Route
 

@@ -14,6 +14,8 @@ const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
 const bookRoutes = require("./routes/bookRoutes");
 app.use("/api/books", bookRoutes);
+const violationRoutes = require("./routes/violationRoutes");
+app.use("/api/violation", violationRoutes);
 
 // Connect to MongoDB
 const uri = process.env.MONGO_URI.trim().replace(/^=/, ""); // Trim any extra spaces or characters
