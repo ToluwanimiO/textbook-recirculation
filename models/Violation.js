@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const ViolationSchema = new mongoose.Schema(
   {
-    type: { type: String, required: t },
+    type: { type: String, required: true },
     book: String,
     school: String,
     donor: String,
