@@ -104,3 +104,11 @@ exports.login = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+exports.getAllSchools = async (req, res) => {
+  try {
+    const schools = await User.find({ role: "school" }).select("-password"); 
+    res.status(200).json(schools);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

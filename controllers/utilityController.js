@@ -23,6 +23,6 @@ exports.getStates = async (req, res) => {
     const response = await axios.get(`${BASE_URL}/countries/${countryCode}/states`, { headers });
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch states" });
+    res.status(500).json({ error: "Failed to fetch states",error });
   }
 };
