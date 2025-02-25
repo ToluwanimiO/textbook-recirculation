@@ -19,6 +19,10 @@ const BookSchema = new mongoose.Schema(
     donatedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     isbn: { type: String, unique: false, sparse: true },
     description: { type: String, required: false },
+    quantity: {
+      type: Number,
+      default: 1,
+    },
   },
   { timestamps: true }
 );
