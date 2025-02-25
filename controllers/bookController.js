@@ -28,16 +28,16 @@ exports.addBook = async (req, res) => {
         quantity,
         school,
         donatedBy,
+        isbn,
+        description,
       } = book;
 
       // Validate required fields
       if (!title || !author || !school || !quantity || quantity < 1) {
-        return res
-          .status(400)
-          .json({
-            error:
-              "Each book must have title, author, school, and a valid quantity.",
-          });
+        return res.status(400).json({
+          error:
+            "Each book must have title, author, school, and a valid quantity.",
+        });
       }
 
       // Check if the school exists
@@ -56,6 +56,8 @@ exports.addBook = async (req, res) => {
         school,
         donatedBy,
         quantity,
+        isbn,
+        description,
         status: "available",
       });
     }
@@ -75,7 +77,9 @@ exports.addBook = async (req, res) => {
 
 exports.getAllBooks = async (req, res) => {
   try {
-    const books = await Book.find().populate("donatedBy", "name email").populate("school", "name location");
+    const books = await Book.find()
+      .populate("donatedBy", "name email")
+      .populate("school", "name location");
     res.status(200).json(books);
   } catch (error) {
     res.status(500).json({ error: error.message });
