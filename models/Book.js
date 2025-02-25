@@ -8,7 +8,7 @@ const BookSchema = new mongoose.Schema(
     gradeLevel: { type: String, required: false },
     school: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "School",
+      ref: "User",
       required: true,
     },
     status: {
